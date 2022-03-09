@@ -10,6 +10,7 @@ class PacketListenerAPI: JavaPlugin() {
 
     override fun onEnable() {
         listener = PacketListener(this)
+        val test = ""
     }
 
     override fun onDisable() {}
