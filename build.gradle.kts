@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.6.20-M1"
+    `maven-publish`
 }
 
 val baseAuthor: String by project
@@ -10,7 +11,7 @@ val baseVersion: String by project
 val author = baseAuthor.toLowerCase()
 val name = baseName.toLowerCase()
 
-group = "nl.$author.$name"
+group = "$author.$baseName"
 version = baseVersion
 
 repositories {
@@ -20,7 +21,7 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT")
-    compileOnly("io.netty:netty-all:4.1.24.Final")
+    compileOnly("io.netty:netty-all:4.1.74.Final")
 }
 
 tasks.test {
@@ -29,22 +30,4 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/xanderwander/clientstandapi")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
-    publications {
-        register<MavenPublication>("gpr") {
-            from(components["java"])
-        }
-    }
 }
