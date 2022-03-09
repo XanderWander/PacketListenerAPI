@@ -34,7 +34,8 @@ jobs:
       with:
         gradle-version: 7.3.3
         arguments: build
-
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
     - name: Publish to GitHub Packages
